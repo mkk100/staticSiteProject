@@ -1,7 +1,7 @@
 import unittest
 
 from htmlnode import HTMLNode
-
+from htmlnode import LeafNode
 
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
@@ -20,8 +20,15 @@ class TestTextNode(unittest.TestCase):
         
     def test_prop(self):
         node = HTMLNode("b","yay",['b','c'],{"href": "https://www.google.com", "target": "_blank"})
-        print('\n' + node.props_to_html())
         self.assertEqual(node.props_to_html(),' href="https://www.google.com" target="_blank"')
-
+    
+    def test_leaf(self):
+        ln = LeafNode("p", "This is a paragraph of text.")
+        ln2 = LeafNode("a", "Click me!", {"href": "https://www.google.com"})
+        
+        self.assertEqual(ln.to_html(),'<p>This is a paragraph of text.</p>')
+        self.assertEqual(ln2.to_html(),'<a href="https://www.google.com">Click me!</a>')
+    
+    
 if __name__ == "__main__":
     unittest.main()
