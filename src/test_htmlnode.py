@@ -14,12 +14,13 @@ class TestTextNode(unittest.TestCase):
         node2 = HTMLNode("b","yay",['b','c'],{"href": "https://www.google.com", "target": "_blank"})
         self.assertNotEqual(node.__repr__(), node2.__repr__())
     
-    def printTheValues(self):
+    def test_value(self):
         node = HTMLNode("b","yay",['b','c'],{"href": "https://www.google.com", "targets": "_blank"})
-        print(node.__repr__())
+        print(node.__repr__() + '\n')
         
-    def propTesting(self):
-        node = HTMLNode("b","yay",['b','c'],{"href": "https://www.google.com", "targets": "_blank"})
+    def test_prop(self):
+        node = HTMLNode("b","yay",['b','c'],{"href": "https://www.google.com", "target": "_blank"})
+        print('\n' + node.props_to_html())
         self.assertEqual(node.props_to_html(),' href="https://www.google.com" target="_blank"')
 
 if __name__ == "__main__":
