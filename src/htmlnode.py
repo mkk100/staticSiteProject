@@ -24,11 +24,24 @@ class LeafNode(HTMLNode):
         super().__init__(tag, value, None, props)
     
     def to_html(self):
-        if self.value == '':
+        if self.value is None:
             raise ValueError
-        if self.tag == '':
+        if self.tag is None:
             return self.value
         return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
+
+class ParentNode(HTMLNode):
+    def __init__(self, tag='', children=[], props={}):
+        super().__init__(tag,None, children, props)
+    
+    def to_html(self):
+        if self.tag is None or self.children is None:
+            raise ValueError
+        res = ''
+        for child in self.children:
+            res += f"{child.to_html()}"
+        return f"<{self.tag}>{res}</{self.tag}>"
+        
 
     
     
